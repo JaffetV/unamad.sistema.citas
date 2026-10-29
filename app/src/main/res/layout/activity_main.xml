@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UNAMAD - Sistema de Citas"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestión de Reservas y Servicios"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnIrRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="➕ REGISTRAR NUEVA CITA"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnIrListar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="📋 VER TODAS LAS CITAS"
+        android:textSize="16sp" />
+
+</LinearLayout>
