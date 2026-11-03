@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Comunamadsistemacitas" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Comunamadsistemacitas" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Estilo compatible con AppCompat y Material Design -->
+    </style>
+
 </resources>

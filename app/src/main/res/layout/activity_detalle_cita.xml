@@ -1,74 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:background="@color/bg_screen"
+    android:fillViewport="true"
+    tools:context=".view.DetalleCitaActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gestión de Cita"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp" />
-
-    <TextView
-        android:id="@+id/tvDetalleCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/tvDetalleServicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/tvDetallePrecio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/tvDetalleFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/tvDetalleEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
-
-    <Button
-        android:id="@+id/btnMarcarAtendido"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MARCAR COMO ATENDIDO"
-        android:layout_marginBottom="8dp" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnMarcarCancelado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CANCELAR CITA"
-        android:layout_marginBottom="16dp" />
+        <!-- Encabezado Superior -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/teal_header"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp">
 
-    <Button
-        android:id="@+id/btnEliminarCita"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="🗑️ ELIMINAR DE BASE DE DATOS"
-        android:backgroundTint="#D32F2F" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="28dp">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Gestión de Cita"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.02" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="Estado y acciones de la reserva"
+                    android:textColor="#E0F2F1"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Tarjeta contenedora de la información de la cita -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvDetalleCita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cargando detalles de la cita..."
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="6dp"
+                    android:fontFamily="sans-serif" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botones de Acción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Botón Atendido -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAtendido"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:text="MARCAR COMO ATENDIDO"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/teal_button_primary"
+                app:cornerRadius="28dp"
+                app:icon="@android:drawable/checkbox_on_background"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/white"
+                app:elevation="2dp" />
+
+            <!-- Botón Cancelar Cita -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelado"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:text="CANCELAR CITA"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/teal_button_secondary"
+                app:cornerRadius="28dp"
+                app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/white"
+                app:elevation="2dp" />
+
+            <!-- Botón Eliminar de Base de Datos -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="ELIMINAR DE BASE DE DATOS"
+                android:textColor="#D32F2F"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="#FFEBEE"
+                app:strokeColor="#D32F2F"
+                app:strokeWidth="1.5dp"
+                app:cornerRadius="28dp"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="#D32F2F"
+                app:elevation="0dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

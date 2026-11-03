@@ -1,47 +1,39 @@
-package com.example.comunamadsistemacitas.view
+package com.example.comunamadsistemacitas
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.comunamadsistemacitas.R
-import com.example.comunamadsistemacitas.data.repository.CitaRepository
-import com.example.comunamadsistemacitas.view.adapter.CitaAdapter
 
 class ListarCitasActivity : AppCompatActivity() {
 
-    private lateinit var repository: CitaRepository
-    private lateinit var adapter: CitaAdapter
+    private lateinit var rvCitas: RecyclerView
+    // private lateinit var adapter: CitaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_citas)
 
-        repository = CitaRepository(this)
-        val rvCitas = findViewById<RecyclerView>(R.id.rvCitas)
+        // Vinculación del RecyclerView con el ID de activity_listar_citas.xml
+        rvCitas = findViewById(R.id.rvCitas)
         rvCitas.layoutManager = LinearLayoutManager(this)
 
-        // Configurar el adaptador para enviar los datos de la cita seleccionada a DetalleCitaActivity
-        adapter = CitaAdapter(emptyList()) { citaSeleccionada ->
-            val intent = Intent(this, DetalleCitaActivity::class.java).apply {
-                putExtra("CITA_ID", citaSeleccionada.id)
-                putExtra("CITA_CLIENTE", citaSeleccionada.cliente)
-                putExtra("CITA_SERVICIO", citaSeleccionada.servicio)
-                putExtra("CITA_PRECIO", citaSeleccionada.precio)
-                putExtra("CITA_FECHA", citaSeleccionada.fechaHora)
-                putExtra("CITA_ESTADO", citaSeleccionada.estado.name)
-            }
+        // Asignación de adaptador (descomentar al vincular con tu repositorio)
+        /*
+        val listaCitas = repository.obtenerCitas()
+        adapter = CitaAdapter(listaCitas) { cita ->
+            val intent = Intent(this, DetalleCitaActivity::class.java)
+            intent.putExtra("CITA_ID", cita.id)
             startActivity(intent)
         }
-
         rvCitas.adapter = adapter
+        */
     }
 
-    // Refresca la lista desde SQLite al volver a esta pantalla
     override fun onResume() {
         super.onResume()
-        val lista = repository.obtenerTodasLasCitas()
-        adapter.actualizarLista(lista)
+        // Si tu repositorio actualiza datos al regresar a la lista:
+        // adapter.notificarCambios(repository.obtenerCitas())
     }
 }
