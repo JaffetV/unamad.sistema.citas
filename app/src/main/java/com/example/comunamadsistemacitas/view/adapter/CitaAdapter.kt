@@ -11,6 +11,9 @@ import com.example.comunamadsistemacitas.model.Cita
 import com.example.comunamadsistemacitas.model.EstadoCita
 import java.util.Locale
 
+/**
+ * CitaAdapter: Adaptador de RecyclerView con soporte para visualización de badges de estado y seña abonada.
+ */
 class CitaAdapter(
     private var listaCitas: List<Cita>,
     private val onItemClick: (Cita) -> Unit
@@ -37,10 +40,16 @@ class CitaAdapter(
         holder.tvCliente.text = cita.cliente
         holder.tvServicio.text = cita.servicio
         holder.tvFechaHora.text = cita.fechaHora
-        holder.tvPrecio.text = String.format(Locale.getDefault(), "S/ %.2f", cita.precio)
+
+        if (cita.montoSena > 0.0) {
+            holder.tvPrecio.text = String.format(Locale.getDefault(), "S/ %.2f (Seña: S/ %.2f)", cita.precio, cita.montoSena)
+        } else {
+            holder.tvPrecio.text = String.format(Locale.getDefault(), "S/ %.2f", cita.precio)
+        }
+
         holder.tvEstado.text = cita.estado.name
 
-        // Configuración dinámica de colores de tarjeta/badge según estado
+        // Configuración dinámica de colores de tarjetas según estado
         when (cita.estado) {
             EstadoCita.PENDIENTE -> {
                 holder.tvEstado.setBackgroundColor(ContextCompat.getColor(context, R.color.estado_pendiente_bg))
@@ -50,7 +59,7 @@ class CitaAdapter(
                 holder.tvEstado.setBackgroundColor(ContextCompat.getColor(context, R.color.estado_atendido_bg))
                 holder.tvEstado.setTextColor(ContextCompat.getColor(context, R.color.estado_atendido_text))
             }
-            EstadoCita.CANCELADO -> {
+            EstadoCita.CANCELADO, EstadoCita.NO_SHOW -> {
                 holder.tvEstado.setBackgroundColor(ContextCompat.getColor(context, R.color.estado_cancelado_bg))
                 holder.tvEstado.setTextColor(ContextCompat.getColor(context, R.color.estado_cancelado_text))
             }

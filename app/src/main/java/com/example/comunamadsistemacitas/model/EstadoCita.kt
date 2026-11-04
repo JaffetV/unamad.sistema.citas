@@ -3,5 +3,6 @@ package com.example.comunamadsistemacitas.model
 enum class EstadoCita {
     PENDIENTE,
     ATENDIDO,
-    CANCELADO
+    CANCELADO,
+    NO_SHOW
 }
