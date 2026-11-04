@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="teal_header">#3B6F70</color>
-    <color name="teal_button_primary">#65B3AF</color>
+    <color name="teal_button_primary">#68B5B2</color>
     <color name="teal_button_secondary">#79C5C1</color>
     <color name="bg_screen">#F4F8F8</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- Estado de Citas (Badge Tarjetas) -->
+    <color name="estado_pendiente_bg">#FFF8E1</color>
+    <color name="estado_pendiente_text">#F57F17</color>
+    <color name="estado_atendido_bg">#E8F5E9</color>
+    <color name="estado_atendido_text">#2E7D32</color>
+    <color name="estado_cancelado_bg">#FFEBEE</color>
+    <color name="estado_cancelado_text">#C62828</color>
 </resources>

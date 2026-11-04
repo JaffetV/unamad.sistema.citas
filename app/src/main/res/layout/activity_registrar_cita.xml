@@ -51,7 +51,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Formulario en Tarjeta Blanca -->
+        <!-- Formulario Material Design 3 -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,13 +69,14 @@
 
                 <!-- Campo: Nombre del Cliente -->
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/tilCliente"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
                     android:hint="Nombre del Cliente"
-                    app:boxStrokeColor="@color/teal_header"
-                    app:hintTextColor="@color/teal_header">
+                    app:boxStrokeColor="@color/teal_button_primary"
+                    app:hintTextColor="@color/teal_button_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCliente"
@@ -84,32 +85,35 @@
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Campo: Servicio -->
+                <!-- Campo Desplegable Material 3: Servicio -->
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/tilServicio"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
-                    android:hint="Servicio (ej. Clínica, Barbería)"
-                    app:boxStrokeColor="@color/teal_header"
-                    app:hintTextColor="@color/teal_header">
+                    android:hint="Seleccionar Servicio"
+                    app:boxStrokeColor="@color/teal_button_primary"
+                    app:hintTextColor="@color/teal_button_primary">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/etServicio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text" />
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Campo: Precio -->
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/tilPrecio"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
                     android:hint="Precio del Servicio (S/)"
-                    app:boxStrokeColor="@color/teal_header"
-                    app:hintTextColor="@color/teal_header">
+                    app:boxStrokeColor="@color/teal_button_primary"
+                    app:hintTextColor="@color/teal_button_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPrecio"
@@ -120,13 +124,14 @@
 
                 <!-- Campo: Fecha y Hora -->
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/tilFechaHora"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:hint="Fecha y Hora (ej. 28/10 15:00)"
-                    app:boxStrokeColor="@color/teal_header"
-                    app:hintTextColor="@color/teal_header">
+                    app:boxStrokeColor="@color/teal_button_primary"
+                    app:hintTextColor="@color/teal_button_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etFechaHora"

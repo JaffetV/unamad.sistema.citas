@@ -1,39 +1,42 @@
-package com.example.comunamadsistemacitas
+package com.example.comunamadsistemacitas.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.comunamadsistemacitas.R
+import com.example.comunamadsistemacitas.data.repository.CitaRepository
+import com.example.comunamadsistemacitas.view.adapter.CitaAdapter
 
 class ListarCitasActivity : AppCompatActivity() {
 
     private lateinit var rvCitas: RecyclerView
-    // private lateinit var adapter: CitaAdapter
+    private lateinit var adapter: CitaAdapter
+    private lateinit var repository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_citas)
 
-        // Vinculación del RecyclerView con el ID de activity_listar_citas.xml
+        repository = CitaRepository(this)
+
         rvCitas = findViewById(R.id.rvCitas)
         rvCitas.layoutManager = LinearLayoutManager(this)
 
-        // Asignación de adaptador (descomentar al vincular con tu repositorio)
-        /*
-        val listaCitas = repository.obtenerCitas()
+        val listaCitas = repository.obtenerTodasLasCitas()
         adapter = CitaAdapter(listaCitas) { cita ->
             val intent = Intent(this, DetalleCitaActivity::class.java)
             intent.putExtra("CITA_ID", cita.id)
             startActivity(intent)
         }
         rvCitas.adapter = adapter
-        */
     }
 
     override fun onResume() {
         super.onResume()
-        // Si tu repositorio actualiza datos al regresar a la lista:
-        // adapter.notificarCambios(repository.obtenerCitas())
+        if (::adapter.isInitialized) {
+            adapter.actualizarLista(repository.obtenerTodasLasCitas())
+        }
     }
 }

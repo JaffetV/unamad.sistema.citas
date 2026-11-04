@@ -6,6 +6,10 @@ import com.example.comunamadsistemacitas.data.local.CitasDbHelper
 import com.example.comunamadsistemacitas.model.Cita
 import com.example.comunamadsistemacitas.model.EstadoCita
 
+/**
+ * CitaRepository: Repositorio para la gestión de persistencia local mediante SQLite.
+ * Administra el ciclo de vida de la conexión a la base de datos sin cerrarla prematuramente.
+ */
 class CitaRepository(context: Context) {
 
     private val dbHelper = CitasDbHelper(context)
@@ -20,12 +24,39 @@ class CitaRepository(context: Context) {
             put(CitasDbHelper.COLUMN_FECHA_HORA, cita.fechaHora)
             put(CitasDbHelper.COLUMN_ESTADO, cita.estado.name)
         }
-        val idInsertado = db.insert(CitasDbHelper.TABLE_CITAS, null, values)
-        db.close()
-        return idInsertado
+        return db.insert(CitasDbHelper.TABLE_CITAS, null, values)
     }
 
-    // Obtener todas las citas (READ)
+    // Obtener cita por ID (READ SINGLE)
+    fun obtenerCitaPorId(idCita: Int): Cita? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM ${CitasDbHelper.TABLE_CITAS} WHERE ${CitasDbHelper.COLUMN_ID} = ?",
+            arrayOf(idCita.toString())
+        )
+        var cita: Cita? = null
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_ID))
+            val cliente = cursor.getString(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_CLIENTE))
+            val servicio = cursor.getString(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_SERVICIO))
+            val precio = cursor.getDouble(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_PRECIO))
+            val fechaHora = cursor.getString(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_FECHA_HORA))
+            val estadoString = cursor.getString(cursor.getColumnIndexOrThrow(CitasDbHelper.COLUMN_ESTADO))
+
+            cita = Cita(
+                id = id,
+                cliente = cliente,
+                servicio = servicio,
+                precio = precio,
+                fechaHora = fechaHora,
+                estado = EstadoCita.valueOf(estadoString)
+            )
+        }
+        cursor.close()
+        return cita
+    }
+
+    // Obtener todas las citas (READ ALL)
     fun obtenerTodasLasCitas(): List<Cita> {
         val listaCitas = mutableListOf<Cita>()
         val db = dbHelper.readableDatabase
@@ -53,7 +84,6 @@ class CitaRepository(context: Context) {
         }
 
         cursor.close()
-        db.close()
         return listaCitas
     }
 
@@ -63,25 +93,21 @@ class CitaRepository(context: Context) {
         val values = ContentValues().apply {
             put(CitasDbHelper.COLUMN_ESTADO, nuevoEstado.name)
         }
-        val filasAfectadas = db.update(
+        return db.update(
             CitasDbHelper.TABLE_CITAS,
             values,
             "${CitasDbHelper.COLUMN_ID} = ?",
             arrayOf(idCita.toString())
         )
-        db.close()
-        return filasAfectadas
     }
 
     // Eliminar cita (DELETE)
     fun eliminarCita(idCita: Int): Int {
         val db = dbHelper.writableDatabase
-        val filasEliminadas = db.delete(
+        return db.delete(
             CitasDbHelper.TABLE_CITAS,
             "${CitasDbHelper.COLUMN_ID} = ?",
             arrayOf(idCita.toString())
         )
-        db.close()
-        return filasEliminadas
     }
 }

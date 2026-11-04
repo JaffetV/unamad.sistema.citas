@@ -14,17 +14,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Vincular los botones de la pantalla principal
-        val btnIrRegistrar = findViewById<Button>(R.id.btnIrRegistrar)
-        val btnIrListar = findViewById<Button>(R.id.btnIrListar)
+        val btnRegistrarCita = findViewById<Button>(R.id.btnRegistrarCita)
+        val btnVerCitas = findViewById<Button>(R.id.btnVerCitas)
 
         // Navegación mediante Intents a la Pantalla de Registro
-        btnIrRegistrar.setOnClickListener {
+        btnRegistrarCita.setOnClickListener {
             val intent = Intent(this, RegistrarCitaActivity::class.java)
             startActivity(intent)
         }
 
         // Navegación mediante Intents a la Pantalla de Listado
-        btnIrListar.setOnClickListener {
+        btnVerCitas.setOnClickListener {
             val intent = Intent(this, ListarCitasActivity::class.java)
             startActivity(intent)
         }
